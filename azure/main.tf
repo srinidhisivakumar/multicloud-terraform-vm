@@ -38,7 +38,12 @@ resource "azurerm_public_ip" "public_ip" {
   name                = "tf-public-ip"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
-  allocation_method   = "Dynamic"
+  allocation_method       = "Static"
+  sku                     = "Standard"
+  sku_tier                = "Regional"
+  ip_version              = "IPv4"
+  idle_timeout_in_minutes = 4
+  ddos_protection_mode    = "VirtualNetworkInherited"
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
@@ -63,8 +68,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "20_04-lts-gen2"
-    version   = "latest"
+    sku       = "16.04-LTS"
+    version   = "16.04.201908220"
   }
 
   disable_password_authentication = true
