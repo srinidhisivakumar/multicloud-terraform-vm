@@ -7,7 +7,7 @@ provider "aws" {
 resource "aws_instance" "free_tier_vm" {
     ami                    = var.ami_id # The Amazon Machine Image (AMI) ID, defined as a variable
     instance_type          = "t2.micro" # Instance type, eligible for AWS free tier
-    key_name               = var.key_name # Name of the SSH key pair to access the instance, defined as a variable
+    key_name               = terraform-key # Name of the SSH key pair to access the instance, defined as a variable
     vpc_security_group_ids = [aws_security_group.allow_ssh.id] # Attach the security group allowing SSH access
 
     # Add tags to the instance for identification
